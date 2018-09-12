@@ -15,11 +15,18 @@ const werewolf = new Creature ({
     chanceToCrit: 0.3
 })
 
-let bulletChoice = prompt("Which bullet: iron or silver?")
+let bulletChoice = prompt("Which bullet: iron or silver?").toLowerCase()
 if (bulletChoice === "iron") {
     hunters.baseDamage = 0;
 } else if (bulletChoice === "silver") {
     hunters.baseDamage = 25;
+} else if (bulletChoice === "castiel") {
+    hunters.baseDamage = 100;
+    alert("That's not a bullet, but I'll allow it.");
+} else {
+    hunters.baseDamage = 0;
+    hunters.health = 0;
+    alert("Congrats, Assbutt. You got the Winchesters killed.");
 }
 
 function Creature (options) {
@@ -57,8 +64,8 @@ function battle (hero, ...monsters) {
     monsters.forEach(monster => {
         while (hero.health > 0 && monster.health > 0) {
             hero.fight(monster);
-            hero.fight(monster);
             monster.fight(hero);
+            hero.fight(monster);
         }
         
         console.log(`${hero.name} are at ${hero.health} health and ${monster.name} is at ${monster.health} health`);

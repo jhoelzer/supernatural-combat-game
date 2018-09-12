@@ -15,11 +15,21 @@ const werewolf = new Creature ({
     chanceToCrit: 0.3
 })
 
+function choice() {
+    let elementChoice = document.createElement("div");
+    let resultChoice = document.createTextNode(`You chose ${bulletChoice}`);
+    elementChoice.appendChild(resultChoice);
+    let placeChoice = document.getElementById("choice");
+    placeChoice.appendChild(elementChoice);
+}
+
 let bulletChoice = prompt("Which bullet: iron or silver?").toLowerCase()
 if (bulletChoice === "iron") {
     hunters.baseDamage = 0;
 } else if (bulletChoice === "silver") {
     hunters.baseDamage = 25;
+} else if (bulletChoice === "colt") {
+    hunters.baseDamage = 100;
 } else if (bulletChoice === "castiel") {
     hunters.baseDamage = 100;
     alert("That's not a bullet, but I'll allow it.");
@@ -28,6 +38,7 @@ if (bulletChoice === "iron") {
     hunters.health = 0;
     alert("Congrats, Assbutt. You got the Winchesters killed.");
 }
+choice();
 
 function Creature (options) {
     this.name = options.name;
@@ -41,6 +52,12 @@ function Creature (options) {
         
         if (Math.random() < this.chanceToMiss) {
             message = `${this.name} missed ${creature.name}`
+             // action
+            let elementAction = document.createElement("div");
+            let resultAction = document.createTextNode(message);
+            elementAction.appendChild(resultAction);
+            let placeAction = document.getElementById("action");
+            placeAction.appendChild(elementAction);
         } else {
             const dmg = Math.random() < this.chanceToCrit
                 ? this.baseDamage * 2
@@ -48,12 +65,25 @@ function Creature (options) {
             creature.health -= dmg;
             if (creature === hunters) {
                 message = `${creature.name} have been hit! They are now at ${creature.health} health`;
+                // action
+                let elementAction = document.createElement("div");
+                let resultAction = document.createTextNode(message);
+                elementAction.appendChild(resultAction);
+                let placeAction = document.getElementById("action");
+                placeAction.appendChild(elementAction);
             } else if (creature === werewolf) {
             message = `${creature.name} has been hit! It's now at ${creature.health} health`;
+                // action
+                let elementAction = document.createElement("div");
+                let resultAction = document.createTextNode(message);
+                elementAction.appendChild(resultAction);
+                let placeAction = document.getElementById("action");
+                placeAction.appendChild(elementAction);
             }
         }
         console.log(message);
         return message;
+       
     }
 }
 
@@ -70,6 +100,20 @@ function battle (hero, ...monsters) {
         
         console.log(`${hero.name} are at ${hero.health} health and ${monster.name} is at ${monster.health} health`);
         console.log(`${hero.health > 0 ? hero.name : monster.name} won`);
+        
+        // Final Stats
+        let element = document.createElement("div");
+        let result = document.createTextNode(`${hero.name} are at ${hero.health} health and ${monster.name} is at ${monster.health} health`);
+        element.appendChild(result);
+        let place = document.getElementById("main");
+        place.appendChild(element);
+
+        // Winning Text
+        let elementWin = document.createElement("div");
+        let resultWin = document.createTextNode(`${hero.health > 0 ? hero.name : monster.name} won`);
+        elementWin.appendChild(resultWin);
+        let placeWin = document.getElementById("main");
+        placeWin.appendChild(elementWin);
     })
 }
 

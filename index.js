@@ -35,9 +35,10 @@ if (bulletChoice === "iron") {
     // hunters almost always win (won't win in cases of extreme unluckiness; they have to always miss)
     hunters.baseDamage = 100;
 } else if (bulletChoice === "castiel") {
-    // Castiel is not a bullet, but can be a cop-out if used correctly; hunter base damage set to 100
+    // Castiel is not a bullet, but can be a cop-out if used correctly; hunter base damage set to 100; hunter chance to miss set to 0.1 (less likely to miss)
     // hunters almost always win (won't win in cases of extreme unluckiness; they have to always miss)
     hunters.baseDamage = 100;
+    hunters.chanceToMiss = 0.1;
     alert("That's not a bullet, but I'll allow it.");
 } else {
     // if the user enters anything other than the above choices, the hunters automatically lose; hunter health set to 0

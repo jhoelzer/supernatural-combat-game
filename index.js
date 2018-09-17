@@ -5,9 +5,8 @@ const hunters = new Creature ({
 })
 
 // monster
-const werewolf = new Creature ({
+const werewolf = new Monster ({
     name: "Werewolf",
-    health: 100,
     baseDamage: 50,
     chanceToCrit: 0.3
 })
@@ -93,6 +92,15 @@ function Creature (options) {
     }
 }
 
+// Prototypical Inheritance
+function Monster (options) {
+    Creature.call(this, options);
+    this.health = 100;
+}
+
+Monster.prototype = Object.create(Creature.prototype);
+Monster.prototype.constructor = Monster;
+
 // unique message about the user's chosen weapon
 let weaponChoice;
 if (bulletChoice === "silver" || bulletChoice === "iron") {
@@ -175,3 +183,7 @@ function battle (hero, ...monsters) {
 
 // run the battle code
 battle(hunters, werewolf);
+
+function replay() {
+    location.reload();
+}
